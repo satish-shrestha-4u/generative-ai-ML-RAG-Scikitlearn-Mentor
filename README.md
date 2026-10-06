@@ -1,4 +1,4 @@
-🤖 ML Mentor for Scikit-Learn
+# 🤖 ML Mentor for Scikit-Learn
 A Generative AI RAG Chatbot for Machine Learning and Scikit-Learn
 ML Mentor is a Retrieval-Augmented Generation (RAG) chatbot designed
 to help users learn Machine Learning, Python, and Scikit-Learn.
