@@ -6,6 +6,7 @@ The application combines a curated Machine Learning knowledge base with
 vector search, Hugging Face embeddings, and a Groq-powered Large
 Language Model (LLM) to provide contextual explanations, examples,
 quizzes, and exam-style practice.
+
 🔗 Live Demo:
 https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/
 
