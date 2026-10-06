@@ -30,9 +30,9 @@ EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
 # The number of most relevant text chunks to retrieve from the vector store
 SIMILARITY_TOP_K: int = 3
 # The size of each text chunk in tokens
-CHUNK_SIZE: int = 512
+CHUNK_SIZE: int = 1024
 # The overlap between adjacent text chunks in tokens
-CHUNK_OVERLAP: int = 50
+CHUNK_OVERLAP: int = 200
 
 
 # --- Chat Memory Configuration ---
