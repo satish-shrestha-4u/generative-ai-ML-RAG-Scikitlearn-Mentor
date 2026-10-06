@@ -79,6 +79,9 @@
 
 
 # The Imports
+import nltk
+
+nltk.download("stopwords", quiet=True)
 
 from llama_index.core import (
     StorageContext,
