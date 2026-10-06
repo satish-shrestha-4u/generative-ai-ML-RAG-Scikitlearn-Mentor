@@ -7,8 +7,7 @@ vector search, Hugging Face embeddings, and a Groq-powered Large
 Language Model (LLM) to provide contextual explanations, examples,
 quizzes, and exam-style practice.
 
-# 🔗 Live App:
-https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/
+# 🔗 Live App: https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/
 
 # 📌 Project Overview
 This project demonstrates how a Retrieval-Augmented Generation (RAG)
