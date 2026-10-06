@@ -4,7 +4,7 @@ from pathlib import Path
 
 # --- LLM Model Configuration ---
 LLM_MODEL: str = "openai/gpt-oss-120b"
-LLM_MAX_NEW_TOKENS: int = 512 # Controls how much new output the model can generate.
+LLM_MAX_NEW_TOKENS: int = 450 # Controls how much new output the model can generate.
 LLM_TEMPERATURE: float = 0.01
 LLM_TOP_P: float = 0.95
 LLM_FREQUENCY_PENALTY: float = 0.2
@@ -23,7 +23,7 @@ LLM_SYSTEM_PROMPT: str = (
 # CHAT_MEMORY_TOKEN_LIMIT: int = 2048  # Controls how much previous conversation is retained/provided as memory.
 
 # --- Embedding Model Configuration ---
-EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME: str = "Tarka-AIR/Tarka-Embedding-150M-V1"
 
 
 # --- RAG/VectorStore Configuration ---

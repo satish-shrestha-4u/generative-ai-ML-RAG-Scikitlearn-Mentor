@@ -105,10 +105,10 @@ from src.config import (
     VECTOR_STORE_PATH,
     CHAT_MEMORY_TOKEN_LIMIT,
 )
-from src.model_loader import (
-    get_embedding_model,
-    initialise_llm
-)
+# from src.model_loader import (
+#     get_embedding_model,
+#     initialise_llm
+# )
 
 # Step 1: Creating the vector store and chat engine functions
 
@@ -201,16 +201,22 @@ def get_chat_engine(
 
 
 # Step 4: The main application loop function
-def main_chat_loop() -> None:
-    """Main application loop to run the RAG chatbot."""
+# def main_chat_loop() -> None:
+#     """Main application loop to run the RAG chatbot."""
 
-    print("--- Initialising models... ---")
-    llm: Groq = initialise_llm()
-    embed_model: HuggingFaceEmbedding = get_embedding_model()
+#     print("--- Initialising embedding model... ---")
+#     embed_model: HuggingFaceEmbedding = get_embedding_model()
+#     print("--- Embedding model ready. ---")
 
-    chat_engine: BaseChatEngine = get_chat_engine(
-        llm=llm,
-        embed_model=embed_model
-    )
-    print("--- RAG Chatbot Initialised. ---")
-    chat_engine.chat_repl()
+#     print("--- Initialising Groq... ---")
+#     llm: Groq = initialise_llm()
+#     print("--- Groq ready. ---")
+
+#     print("--- Initialising chat engine... ---")
+#     chat_engine: BaseChatEngine = get_chat_engine(
+#         llm=llm,
+#         embed_model=embed_model
+#     )
+
+#     print("--- RAG Chatbot Initialised. ---")
+#     chat_engine.chat_repl()
