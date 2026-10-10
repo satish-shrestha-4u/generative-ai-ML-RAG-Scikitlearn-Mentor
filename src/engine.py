@@ -79,7 +79,10 @@
 
 
 # The Imports
+from typing import cast
+
 import nltk
+import streamlit as st
 
 nltk.download("stopwords", quiet=True)
 
@@ -95,20 +98,25 @@ from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import Document
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.groq import Groq
+from llama_index.core.chat_engine import CondensePlusContextChatEngine
+from llama_index.core.postprocessor import SentenceTransformerRerank
 
 from src.config import (
     CHUNK_OVERLAP,
     CHUNK_SIZE,
     DATA_PATH,
+    EMBEDDING_MODEL_NAME,
     LLM_SYSTEM_PROMPT,
     SIMILARITY_TOP_K,
     VECTOR_STORE_PATH,
     CHAT_MEMORY_TOKEN_LIMIT,
+    RERANKER_TOP_N,
+    RERANKER_MODEL_NAME,
 )
-# from src.model_loader import (
-#     get_embedding_model,
-#     initialise_llm
-# )
+from src.model_loader import (
+    get_embedding_model,
+    initialise_llm
+)
 
 # Step 1: Creating the vector store and chat engine functions
 
@@ -124,7 +132,7 @@ def _create_new_vector_store(
     # This reads all the files in the specified directory.
     documents: list[Document] = SimpleDirectoryReader(
         input_dir=DATA_PATH,
-        recursive=True
+        recursive=True # Recursively read files in subdirectories
     ).load_data()
 
     if not documents:
@@ -153,6 +161,7 @@ def _create_new_vector_store(
 
 
 # Step 2: Loading the vector store and chat engine functions
+@st.cache_resource(hash_funcs={HuggingFaceEmbedding: lambda _: EMBEDDING_MODEL_NAME})
 def get_vector_store(embed_model: HuggingFaceEmbedding) -> VectorStoreIndex:
     """
     Loads the vector store from disk if it exists;
@@ -169,9 +178,14 @@ def get_vector_store(embed_model: HuggingFaceEmbedding) -> VectorStoreIndex:
             persist_dir=VECTOR_STORE_PATH.as_posix()
         )
         # We must provide the embed_model when loading the index.
-        return load_index_from_storage(
-            storage_context,
-            embed_model=embed_model
+        # load_index_from_storage() returns a generic BaseIndex, so we cast it
+        # to the concrete VectorStoreIndex type expected by the rest of the app.
+        return cast(
+            VectorStoreIndex,
+            load_index_from_storage(
+                storage_context,
+                embed_model=embed_model,
+            ),
         )
     else:
         # If the directory is empty,
@@ -179,44 +193,64 @@ def get_vector_store(embed_model: HuggingFaceEmbedding) -> VectorStoreIndex:
         return _create_new_vector_store(embed_model)
 
 # Step 3: Assembly of the RAG chat engine
+@st.cache_resource
+def _get_reranker() -> SentenceTransformerRerank:
+    """Reuse the cross-encoder loaded by SentenceTransformerRerank."""
+    return SentenceTransformerRerank(
+        top_n=RERANKER_TOP_N,
+        model=RERANKER_MODEL_NAME,
+    )
+
+
 def get_chat_engine(
         llm: Groq,
-        embed_model: HuggingFaceEmbedding
-) -> BaseChatEngine:
+        embed_model: HuggingFaceEmbedding,
+        similarity_top_k: int = SIMILARITY_TOP_K,
+        system_prompt: str = LLM_SYSTEM_PROMPT,
+) -> CondensePlusContextChatEngine:
     """Initialises and returns the main conversational RAG chat engine."""
 
     vector_index: VectorStoreIndex = get_vector_store(embed_model)
+
+    # 1. Create the Retriever
+    retriever = vector_index.as_retriever(similarity_top_k=similarity_top_k)
+
+    # 2. Setup the Reranker
+    reranker = _get_reranker()
+
+    # 3. Setup Memory
     memory: ChatMemoryBuffer = ChatMemoryBuffer.from_defaults(
         token_limit=CHAT_MEMORY_TOKEN_LIMIT
     )
 
-    # Assemble the RAG chat engine
-    chat_engine: BaseChatEngine = vector_index.as_chat_engine(
-        memory=memory,
+    # 4. Assemble the advanced Chat Engine
+    chat_engine = CondensePlusContextChatEngine(
+        retriever=retriever,
         llm=llm,
-        system_prompt=LLM_SYSTEM_PROMPT,
-        similarity_top_k=SIMILARITY_TOP_K,
+        memory=memory,
+        system_prompt=system_prompt,
+        node_postprocessors=[reranker]
     )
+
     return chat_engine
 
 
 # Step 4: The main application loop function
-# def main_chat_loop() -> None:
-#     """Main application loop to run the RAG chatbot."""
+def main_chat_loop() -> None:
+    """Main application loop to run the RAG chatbot."""
+    print("--- Initialising Groq... ---")
+    llm: Groq = initialise_llm()
+    print("--- Groq ready. ---")
 
-#     print("--- Initialising embedding model... ---")
-#     embed_model: HuggingFaceEmbedding = get_embedding_model()
-#     print("--- Embedding model ready. ---")
+    print("--- Initialising embedding model... ---")
+    embed_model: HuggingFaceEmbedding = get_embedding_model()
+    print("--- Embedding model ready. ---")
 
-#     print("--- Initialising Groq... ---")
-#     llm: Groq = initialise_llm()
-#     print("--- Groq ready. ---")
+    print("--- Initialising chat engine... ---")
+    chat_engine: CondensePlusContextChatEngine = get_chat_engine(
+        llm=llm,
+        embed_model=embed_model
+    )
 
-#     print("--- Initialising chat engine... ---")
-#     chat_engine: BaseChatEngine = get_chat_engine(
-#         llm=llm,
-#         embed_model=embed_model
-#     )
-
-#     print("--- RAG Chatbot Initialised. ---")
-#     chat_engine.chat_repl()
+    print("--- RAG Chatbot Initialised. ---")
+    chat_engine.chat_repl()

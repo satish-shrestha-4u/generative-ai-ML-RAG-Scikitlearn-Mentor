@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 from dotenv import load_dotenv
 
 from llama_index.llms.groq import Groq
@@ -20,10 +21,10 @@ from src.config import (
 load_dotenv()
 
 
-def initialise_llm() -> Groq:
+def initialise_llm(api_key: str | None = None) -> Groq:
     """Initialises the Groq LLM with core parameters from config."""
 
-    api_key: str | None = os.getenv("GROQ_API_KEY")
+    api_key = api_key or os.getenv("GROQ_API_KEY")
 
     if not api_key:
         raise ValueError(
@@ -38,6 +39,7 @@ def initialise_llm() -> Groq:
         max_tokens=LLM_MAX_NEW_TOKENS,
         temperature=LLM_TEMPERATURE,
         top_p=LLM_TOP_P,
+        context_window=131072,
         # additional_kwargs={
             #"frequency_penalty": LLM_FREQUENCY_PENALTY,
             #"presence_penalty": LLM_PRESENCE_PENALTY,
@@ -46,9 +48,7 @@ def initialise_llm() -> Groq:
 
 
 
-
-
-
+@st.cache_resource
 def get_embedding_model() -> HuggingFaceEmbedding:
     """Initialises and returns the HuggingFace embedding model"""
 

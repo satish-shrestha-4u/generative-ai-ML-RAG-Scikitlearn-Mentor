@@ -1,10 +1,53 @@
 import streamlit as st
+import base64
+from pathlib import Path
+import streamlit as st
 
 from llama_index.core.chat_engine.types import BaseChatEngine
 
 from src.model_loader import initialise_llm, get_embedding_model
 from src.engine import get_chat_engine
 
+
+# ---------------------------------------------------------
+# Custom background
+# ---------------------------------------------------------
+
+BACKGROUND_IMAGE = Path("/Users/pansupari/Desktop/Chapter 15 AI Engineering/RAG/background_image/ai_image.jpg")
+
+if BACKGROUND_IMAGE.exists():
+    encoded_image = base64.b64encode(
+        BACKGROUND_IMAGE.read_bytes()
+    ).decode()
+
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image:
+                linear-gradient(
+                    rgba(5, 10, 25, 0.78),
+                    rgba(5, 10, 25, 0.78)
+                ),
+                url("data:image/jpeg;base64,{encoded_image}");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+
+        [data-testid="stSidebar"] {{
+            background: rgba(5, 10, 25, 0.92);
+        }}
+
+        .block-container {{
+            position: relative;
+            z-index: 1;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 # ---------------------------------------------------------
 # PAGE CONFIGURATION
@@ -16,17 +59,24 @@ st.set_page_config(
     layout="wide",
 )
 
+# ---------------------------------------------------------
+# SESSION STATE
+# ---------------------------------------------------------
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
 
 # ---------------------------------------------------------
 # INITIALISE CHAT ENGINE
 # ---------------------------------------------------------
 
-def initialise_chat_engine() -> BaseChatEngine:
+def initialise_chat_engine(api_key: str | None = None) -> BaseChatEngine:
     """
     Initialise the LLM, embedding model and RAG chat engine.
     """
 
-    llm = initialise_llm()
+    llm = initialise_llm(api_key)
     embed_model = get_embedding_model()
 
     chat_engine = get_chat_engine(
@@ -38,22 +88,15 @@ def initialise_chat_engine() -> BaseChatEngine:
 
 
 # ---------------------------------------------------------
-# SESSION STATE
-# ---------------------------------------------------------
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-if "chat_engine" not in st.session_state:
-    with st.spinner("Loading ML Mentor..."):
-        st.session_state.chat_engine = initialise_chat_engine()
-
-
-# ---------------------------------------------------------
 # SIDEBAR
 # ---------------------------------------------------------
-
 with st.sidebar:
+    
+    api_key_input = st.text_input(
+    "Your Groq API key `Optional`",
+    type="password",
+    help="Leave blank to use default GROQ_API_KEY",
+).strip()
 
     st.title("🧠 ML Mentor")
 
@@ -96,9 +139,15 @@ with st.sidebar:
 
         # Re-create the chat engine so its internal memory is also reset.
         with st.spinner("Resetting ML Mentor..."):
-            st.session_state.chat_engine = initialise_chat_engine()
+            st.session_state.chat_engine = initialise_chat_engine(api_key_input or None)
 
         st.rerun()
+
+    if "chat_engine" not in st.session_state:
+        with st.spinner("Loading ML Mentor..."):
+            st.session_state.chat_engine = initialise_chat_engine(
+                api_key_input or None
+            )
 
 
 # ---------------------------------------------------------
@@ -148,7 +197,7 @@ if not st.session_state.messages:
 # DISPLAY PREVIOUS MESSAGES
 # ---------------------------------------------------------
 
-for message in st.session_state.messages:
+for message_index, message in enumerate(st.session_state.messages):
 
     with st.chat_message(message["role"]):
 
@@ -162,6 +211,13 @@ for message in st.session_state.messages:
                 for source in message["sources"]:
 
                     st.markdown(source)
+
+        # Show feedback controls below assistant answers
+        if message["role"] == "assistant" and not message.get("is_error"):
+            st.feedback(
+                "thumbs",
+                key=f"answer_feedback_{message_index}",
+            )
 
 
 # ---------------------------------------------------------
@@ -264,6 +320,11 @@ if user_question:
 
                         for source in sources:
                             st.markdown(source)
+                # ---------------------------------------------
+                st.feedback(
+                    "thumbs",
+                    key=f"answer_feedback_{len(st.session_state.messages)}",
+                )
 
                 # ---------------------------------------------
                 # Save assistant message
@@ -293,3 +354,5 @@ if user_question:
                         "content": error_message,
                     }
                 )
+
+
