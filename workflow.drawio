@@ -1,0 +1,151 @@
+<mxfile host="Electron" agent="ChatGPT">
+  <diagram id="rag-workflow-v2" name="RAG Chatbot Workflow">
+    <mxGraphModel dx="1768" dy="1258" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=20;fontStyle=1;spacing=8;fillColor=#fad7ac;strokeColor=#b46504;" value="&lt;font style=&quot;font-size: 27px;&quot;&gt;GENERATIVE AI RAG — SCikit-Learn / ML MENTOR CHATBOT&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="1520" x="40" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a1_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#3b82f6;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;1  PROJECT&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="195" x="60" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Goal Build an ML Mentor chatbot for Machine Learning &amp;amp; Scikit-Learn.  Knowledge base Course materials stored in data/&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="195" x="60" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a2_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8b5cf6;strokeColor=#8b5cf6;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;2  PREPARE DATA&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="195" x="280" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#8b5cf6;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Document ingestion SimpleDirectoryReader  Chunking SentenceSplitter  Selected production chunks 1280 / 256&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="195" x="280" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a3_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#06b6d4;strokeColor=#06b6d4;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;3  BUILD RAG INDEX&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="215" x="500" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfeff;strokeColor=#06b6d4;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Embeddings Tarka-AIR/Tarka-Embedding-150M-V1  Vector store local_storage/vector_store/  Reuse existing store on startup&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="215" x="500" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a4_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#22c55e;strokeColor=#22c55e;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;4  RETRIEVE&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="195" x="740" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Retriever similarity_top_k = 10  Reranker top_n = 2  Most relevant context → LLM&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="195" x="740" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a5_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f97316;strokeColor=#f97316;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;5  GENERATE&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="215" x="960" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#f97316;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Chat memory ChatMemoryBuffer  CondensePlus&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;ContextChatEngine  Groq openai/gpt-oss-120b max output = 2000&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="215" x="960" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a6_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ec4899;strokeColor=#ec4899;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;6  PRESENT&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="160" x="1200" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf2f8;strokeColor=#ec4899;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Streamlit UI • Answer • Sources • New Chat • Feedback  User asks next question or starts a new chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="160" x="1200" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eab308;strokeColor=#eab308;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;7  DEPLOY&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="160" x="1385" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#eab308;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Local test VS Code + Conda  GitHub Push final code  Streamlit Cloud Production app&lt;/font&gt;" vertex="1">
+          <mxGeometry height="172" width="160" x="1385" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="e101" edge="1" parent="1" source="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e102" edge="1" parent="1" source="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e103" edge="1" parent="1" source="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e104" edge="1" parent="1" source="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e105" edge="1" parent="1" source="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e106" edge="1" parent="1" source="a6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="a7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eval_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad9d5;strokeColor=#ae4132;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;EVALUATION &amp;amp; OPTIMISATION — USED TO SELECT THE PRODUCTION CONFIGURATION&lt;/font&gt;" vertex="1">
+          <mxGeometry height="42" width="1485" x="60" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="b1_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Baseline&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="250" x="80" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontColor=#0f172a;fontSize=13;spacing=8;" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Initial RAG configuration&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="250" x="80" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="b2_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Chunking&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="250" x="365" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontColor=#0f172a;fontSize=13;spacing=8;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Compare 512/50 • 768/115 1024/200 • 1280/256&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="250" x="365" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="b3_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 26px;&quot;&gt;Reranker&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="250" x="650" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontColor=#0f172a;fontSize=13;spacing=8;" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;Compare retriever_k / reranker_n&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="250" x="650" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="b4_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 23px;&quot;&gt;Query rewriting&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="250" x="935" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontColor=#0f172a;fontSize=13;spacing=8;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;HyDE OFF vs HyDE ON&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="250" x="935" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="b5_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;fontSize=15;spacing=6;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Ragas metrics&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="285" x="1220" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontColor=#0f172a;fontSize=13;spacing=8;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Faithfulness,&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;Answer Correctness,&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;Context Precision,&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;Context Recall&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="95" width="285" x="1220" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="b1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="b2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="b2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="b3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="b3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="b4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="b4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;" target="b5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#f97316;fontColor=#0f172a;fontSize=14;fontStyle=1;spacing=8;" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;DECISION Use evaluation results to select the best chunking + reranker configuration. For this dataset, HyDE OFF was preferred.&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="570" x="475" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="b5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" target="decision" value="compare results">
+          <mxGeometry relative="1" x="-0.0347" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1362.5" y="650" />
+              <mxPoint x="760" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="files_h" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=15;spacing=6;gradientColor=#97d077;" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;KEY PROJECT COMPONENTS&lt;/font&gt;" vertex="1">
+          <mxGeometry height="42" width="1485" x="58" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;div style=&quot;line-height: 210%;&quot;&gt;&lt;span&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;streamlit_app.py&lt;br&gt;User interface &amp;amp; chat controls&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="270" x="70" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b style=&quot;&quot;&gt;src/model_loader.py&lt;/b&gt;&lt;br&gt;Groq LLM + embedding model&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="270" x="365" y="881" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b style=&quot;&quot;&gt;src/engine.py&lt;/b&gt;&lt;br&gt;Vector store + retriever + reranker + chat engine&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="270" x="660" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;&lt;b style=&quot;&quot;&gt;src/config.py&lt;/b&gt;&lt;br&gt;Production settings&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="270" x="960" y="881" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=12;spacing=8;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;&lt;b style=&quot;&quot;&gt;evaluation/&lt;/b&gt;&lt;br&gt;Ragas evaluation &amp;amp; experiments&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="270" x="1270" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;spacing=8;gradientColor=#97d077;" value="FINAL RESULT A deployed, evaluated RAG chatbot for learning Machine Learning &amp; Scikit-Learn." vertex="1">
+          <mxGeometry height="80" width="650" x="500" y="1000" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
