@@ -96,8 +96,8 @@ st.markdown(
     <style>
     div[data-testid="stTextInput"] input {
         border: 2px solid #4A90E2;
-        border-radius: 8px;
-        padding: 8px;
+        border-radius: 6px;
+        padding: 6px;
     }
     </style>
     """,
