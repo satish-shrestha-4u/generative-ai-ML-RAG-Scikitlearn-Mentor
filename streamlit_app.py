@@ -13,7 +13,8 @@ from src.engine import get_chat_engine
 # Custom background
 # ---------------------------------------------------------
 
-BACKGROUND_IMAGE = Path("/Users/pansupari/Desktop/Chapter 15 AI Engineering/RAG/background_image/ai_image.jpg")
+BACKGROUND_IMAGE = Path(__file__).parent / "/Users/pansupari/Desktop/Chapter 15 AI Engineering/RAG/background_image/ai_image.jpg"
+
 
 if BACKGROUND_IMAGE.exists():
     encoded_image = base64.b64encode(
@@ -55,7 +56,7 @@ if BACKGROUND_IMAGE.exists():
 
 st.set_page_config(
     page_title="ML Mentor for Scikit-Learn",
-    page_icon="🤖",
+    page_icon="🧠",
     layout="wide",
 )
 
@@ -90,6 +91,19 @@ def initialise_chat_engine(api_key: str | None = None) -> BaseChatEngine:
 # ---------------------------------------------------------
 # SIDEBAR
 # ---------------------------------------------------------
+st.markdown(
+    """
+    <style>
+    div[data-testid="stTextInput"] input {
+        border: 2px solid #4A90E2;
+        border-radius: 8px;
+        padding: 8px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 with st.sidebar:
     
     api_key_input = st.text_input(
@@ -97,6 +111,7 @@ with st.sidebar:
     type="password",
     help="Leave blank to use default GROQ_API_KEY",
 ).strip()
+
 
     st.title("🧠 ML Mentor")
 
