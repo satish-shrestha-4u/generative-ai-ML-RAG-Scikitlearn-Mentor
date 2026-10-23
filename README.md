@@ -2,7 +2,7 @@
 
 > A Generative AI Retrieval-Augmented Generation (RAG) chatbot designed to help users learn Machine Learning, Python, and Scikit-Learn through contextual explanations, examples, quizzes, and exam-style practice.
 
-## 🔗 Live App: https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/
+## 🔗 <a href="https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/" target="_blank">Live App</a>
 
 ---
 
@@ -248,11 +248,9 @@ Future versions could include:
 
 **Satish Shrestha**
 
-Data Science | Machine Learning | Scikit-Learn | Generative AI | RAG
+<a href="https://github.com/satish-shrestha-4u" target="_blank">GitHub</a>
 
-GitHub: [Satish Shrestha](https://github.com/satish-shrestha-4u)
-
-LinkedIn: [Satish Shrestha](https://www.linkedin.com/in/shrestha-satish/)
+<a href="https://www.linkedin.com/in/shrestha-satish/" target="_blank">LinkedIn</a>
 
 ---
 
