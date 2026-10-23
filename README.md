@@ -4,6 +4,11 @@
 
 ## 🔗 <a href="https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/" target="_blank">Live App</a>
 
+<p align="left">
+  <a href="https://generative-ai-ml-rag-scikitlearn-mentor.streamlit.app/">
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit-red?style=for-the-badge" alt="Live Demo">
+  </a>
+
 ---
 
 ## 📌 Project Overview
@@ -248,9 +253,18 @@ Future versions could include:
 
 **Satish Shrestha**
 
-<a href="https://github.com/satish-shrestha-4u" target="_blank">GitHub</a>
-
-<a href="https://www.linkedin.com/in/shrestha-satish/" target="_blank">LinkedIn</a>
+<p>
+  <a href="https://www.linkedin.com/in/shrestha-satish/">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+         width="40"
+         alt="LinkedIn">
+<p>
+  <a href="https://github.com/satish-shrestha-4u">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+         width="40"
+         alt="GitHub">
+  </a>
+</p>
 
 ---
 
